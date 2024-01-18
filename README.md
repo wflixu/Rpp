@@ -1,2 +1,2 @@
-# Rpp
-Rustify Python  Package manager
+# rppm
+Rustify Python  Package Manager
