@@ -1,2 +1,3 @@
 [workspace]
-members = [ "echor"]
+edition = "2021"
+members = [ "echor", "catr"]

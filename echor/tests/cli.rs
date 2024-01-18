@@ -29,19 +29,19 @@ fn run(args:&[&str], expected_file:&str) -> TestResult {
 
 #[test]
 fn hello1() -> TestResult {
-    run(&["hello there"], "tests/expected/hello1.txt")
+    run(&["Hello there"], "tests/expected/hello1.txt")
 }
 
 #[test]
 fn hello2() -> TestResult {
-    run(&["hello", "there"], "tests/expected/hello2.txt")
+    run(&["Hello", "there"], "tests/expected/hello2.txt")
 }
 
 #[test]
 fn hello1_no_newline() -> TestResult {
-    run(&["hello there", "-n"], "tests/expected/hello1.n.txt")
+    run(&["Hello there", "-n"], "tests/expected/hello1.n.txt")
 }
 #[test]
 fn hello2_no_newline() -> TestResult {
-    run(&["-n", "hello", "there"], "tests/expected/hello2.n.txt")
+    run(&["-n", "Hello", "there"], "tests/expected/hello2.n.txt")
 }
