@@ -1,10 +1,26 @@
-use clap::{App, Arg};
+use clap::{ App, Arg};
 use std::error::Error;
+use std::fs::File;
+use std::io::{self, BufRead, BufReader};
 
 type MyResult<T> = Result<T, Box<dyn Error>>;
 pub fn run(config: Config) -> MyResult<()> {
-    dbg!(config);
+    // dbg!(config);
+    for filename in config.files {
+        match  open(&filename) {
+           Err(err) => eprintln!("fail to open{}:{}", filename, err ) ,
+           Ok(_) => println!("opened {}", filename)
+        }
+       
+    }
     Ok(())
+}
+
+pub fn open(filename: &str) -> MyResult<Box<dyn BufRead>> {
+  match filename {
+    "-" => Ok(Box::new(BufReader::new(io::stdin()))),
+    _ => Ok(Box::new(BufReader::new(File::open(filename)?))),
+  }
 }
 
 #[derive(Debug)]
@@ -22,9 +38,9 @@ pub fn get_args() -> MyResult<Config> {
         .arg(
             Arg::with_name("files")
                 .value_name("FILE")
-                .required(true)
                 .help("input file name")
-                .min_values(1),
+                .multiple(true)
+                .default_value("-"),
         )
         .arg(
             Arg::with_name("number_lines")
